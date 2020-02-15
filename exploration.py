@@ -13,6 +13,7 @@ def summary(df):
 	print(df.dtypes)
 	print('Percent of values that are NA in each column')
 	print(((df.isna().sum()) / (df.count())) * 100)
+	print(df['neighbourhood_group'].unique())
 
 def histplots(df):
 	df.dropna(axis=0, inplace=True)
