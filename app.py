@@ -76,6 +76,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
 					sort_mode='single',
 					filter_query='',
 					page_size=10
+				),
+				dcc.Graph(
+					id='scatter_reviews'
 				)
 			]
 		)
@@ -93,9 +96,8 @@ def update_neighborhood(selected_n):
 			x = sliced_df[sliced_df['neighbourhood_group'] == i]['neighbourhood'],
 			y = sliced_df[sliced_df['neighbourhood_group'] == i]['price'],
 			type = 'bar'
-
-			))
-
+			)
+		)
 	return {
 		'data': traces,		
 		'layout': {
@@ -111,6 +113,21 @@ def update_table(selected_n):
 	sliced_df = df[(df['neighbourhood_group'] == selected_n) & (df['price'] >150)].nlargest(10,'price')
 	data = sliced_df.to_dict("rows")
 	return 	data
-		
+	
+@app.callback(
+	Output('scatter_reviews', 'figure'),
+	[Input('Neighbourhoods', 'value')])
+def update_scatter(selected_n):
+	sliced_df = df[(df['neighbourhood_group'] == selected_n) & (df['price'] < 600)]
+
+	return {
+		'data': [
+		{'x': sliced_df['number_of_reviews'], 'y': sliced_df['price'], 'type': 'scatter', 'mode': 'markers'
+		}],		
+		'layout': {
+		'title': 'Prices vs number of reviews',
+		}
+	}
+
 if __name__ == '__main__':
 	app.run_server(debug=True)
