@@ -46,6 +46,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
 						dcc.Graph(
 							id='Neighbourhood vs Price',
 						),
+						# List of availabel neighbourhood groups to slice our data.
 						dcc.Markdown('''
 							Available Neighbourhood Groups to Select
 							* Brooklyn
@@ -55,6 +56,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
 							* Bronx
 						'''
 						),
+						# Our main Input that will control all of our visuals.
 						dcc.Input(
 							id='Neighbourhoods',
 							type= 'text',
@@ -71,12 +73,14 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
 		html.Div(
 			children=[
 				dt.DataTable(
+					# this is our datatable
 					id='table',
 					columns=[{'name': i, 'id': i} for i in df[['host_name','neighbourhood','neighbourhood_group','price']].columns],
 					sort_mode='single',
 					filter_query='',
 					page_size=10
 				),
+				# this is our scatter plot
 				dcc.Graph(
 					id='scatter_reviews'
 				)
