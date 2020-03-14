@@ -24,15 +24,16 @@ def histplots(df):
 	for i, j in zip(a, b):
 		plt.subplot(len(b),1,i)
 		sns.kdeplot(df[j])
-	plt.savefig('image.png')
+	# plt.savefig('image.png')
+	plt.show()
 
 def scatterplots(df):
 	df = df[df['price'] < 1250]
 	x_axis = df['price']
 	y_axis = df['number_of_reviews']
 	sns.scatterplot(x=x_axis, y=y_axis, hue=df['neighbourhood_group'])
-	plt.savefig('imagescatter.png')
-
+	# plt.savefig('imagescatter.png')
+	plt.show()
 
 df = pd.read_csv('AB_NYC_2019.csv')
 
@@ -44,7 +45,7 @@ summary(df)
 print(df['last_review'])
 print(df['reviews_per_month'])
 
-# histplots(df)
+histplots(df)
 
 scatterplots(df)
 

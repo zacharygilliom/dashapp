@@ -21,8 +21,9 @@ def slice_dataframe_by_neighbourhood_group(df, i):
 	return df
 
 df = pd.read_csv('AB_NYC_2019.csv')
+
 # Quick summary of our dataset
-get_summary(df)
+# get_summary(df)
 
 # Creating our neighbourhood group slices first so that they don't have to be created everytime we select data in our app
 df_manhattan = slice_dataframe_by_neighbourhood_group(df, 'Manhattan')
@@ -122,13 +123,6 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
 						'backgroundColor': 'rgb(50, 50, 50)',
 						'color': colors['text']
 					}
-					# 'layout': {
-					# 	'title': 'Neighbourhoods vs Prices',
-					# 	'plot_bgcolor': colors['background'],
-					# 	'paper_bgcolor': colors['background'],
-					# 	'font': {
-					# 		'color': colors['text']
-					# 	}
 
 				),
 				# this is our scatter plot
