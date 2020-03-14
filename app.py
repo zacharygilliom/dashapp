@@ -128,6 +128,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
 				# this is our scatter plot
 				dcc.Graph(
 					id='scatter_reviews'
+				),
+				dcc.Graph(
+					id='review-hist',
 				)
 			]
 		)
@@ -215,6 +218,68 @@ def update_scatter(selected_n):
 
 		}
 	}
+
+@app.callback(
+	Output('review-hist', 'figure'),
+	[Input('Neighbourhoods', 'value')])
+def update_hist(selected_n):
+	sliced_df = neighbourhood_groups[selected_n]
+	sliced_df = sliced_df[sliced_df['price'] < 2000]
+	# fig = go.Figure(
+	# 	data=
+	# 		[go.Histogram(
+	# 			x=sliced_df['price'],
+	# 				marker_color = colors['text']		
+	# 		)
+	# 		],
+	# 	layout=
+	# 		[go.Layout(
+	# 			title='Price Distribution'
+	# 			)]
+
+	# )
+	return  {
+        'data': [
+            {
+                'x': sliced_df['price'],
+                # 'customdata': df['storenum'],
+                'name': 'Price',
+                'type': 'histogram',
+                # 'autobinx': False,
+                # 'xbins': {
+                #     'start': '1961-12-31',
+                #     'end': '2006-12-31',
+                #     'size': (
+                #         'M12' if value == 'Yearly' else
+                #         'M3' if value == 'Seasonally' else
+                #         'M1' if value == 'Monthly' else
+                #         1000 * 60 * 60 * 24 * 7   # Weekly
+                #     )
+                # }
+            }
+        ],
+        'layout': {
+            # 'margin': {'l': 40, 'r': 20, 't': 0, 'b': 30},
+            'title': 'Price Distribution',
+            'plot_bgcolor': colors['background'],
+            'paper_bgcolor': colors['background'],
+            'font': {
+            	'color': colors['text']
+            },
+            'yaxis': {
+            	'title': 'Frequency',
+            	'gridcolor': 'rgb(120, 120, 120)',
+            	'gridwidth': 1.0
+            },
+            'xaxis': {
+            	'title': 'Price',
+            	'gridcolor': 'rgb(120, 120, 120)',
+            	'gridwidth': 1.0
+            }
+        }
+    }
+
+
 
 if __name__ == '__main__':
 	app.run_server(debug=True)
