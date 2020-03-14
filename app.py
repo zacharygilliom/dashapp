@@ -153,13 +153,18 @@ def update_neighborhood(selected_n):
 			# 'template': 'plotly_dark'
 			'plot_bgcolor': colors['background'],
 			'paper_bgcolor': colors['background'],
+			'margin': {
+				'b': 145
+			},
 			'yaxis': {
 				'gridwith': 3,
 				'gridcolor': 'rgb(120, 120, 120)',
+				'title': 'Price',
 			},
 			'xaxis': {
 				'gridwidth': 2,
-				'showgrid': False
+				'showgrid': False,
+				'title': 'Sub-Neighbourhood'
 			},
 			'font': {
 				'color': colors['text']
@@ -188,7 +193,7 @@ def update_scatter(selected_n):
 
 	return {
 		'data': [
-		{'x': sliced_df['price'], 'y': sliced_df['number_of_reviews'], 'type': 'scatter', 'mode': 'markers'
+		{'x': sliced_df['number_of_reviews'], 'y': sliced_df['price'], 'type': 'scatter', 'mode': 'markers'
 		}],		
 		'layout': {
 			'title': 'Prices vs number of reviews',
@@ -196,11 +201,13 @@ def update_scatter(selected_n):
 			'paper_bgcolor': colors['background'],
 			'yaxis': {
 				'gridwidth': 1.0,
-				'gridcolor': 'rgb(120, 120, 120)'
+				'gridcolor': 'rgb(120, 120, 120)',
+				'title': 'Price',
 			},
 			'xaxis': {
 				'gridwidth': 1.0,
-				'gridcolor': 'rgb(120, 120, 120)'
+				'gridcolor': 'rgb(120, 120, 120)',
+				'title': 'Number of Reviews',
 			},
 			'font': {
 				'color': colors['text']
