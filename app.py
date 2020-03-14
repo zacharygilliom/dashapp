@@ -149,14 +149,24 @@ def update_neighborhood(selected_n):
 	traces.append(dict(
 		x = sliced_df['neighbourhood'],
 		y = sliced_df['price'],
-		type = 'bar'
+		type = 'bar',
+		# template='plotly_dark',
 		))
 	return {
 		'data': traces,		
 		'layout': {
 			'title': 'Neighbourhoods vs Prices',
+			# 'template': 'plotly_dark'
 			'plot_bgcolor': colors['background'],
 			'paper_bgcolor': colors['background'],
+			'yaxis': {
+				'gridwith': 3,
+				'gridcolor': 'rgb(120, 120, 120)',
+			},
+			'xaxis': {
+				'gridwidth': 2,
+				'showgrid': False
+			},
 			'font': {
 				'color': colors['text']
 			}
@@ -190,6 +200,14 @@ def update_scatter(selected_n):
 			'title': 'Prices vs number of reviews',
 			'plot_bgcolor': colors['background'],
 			'paper_bgcolor': colors['background'],
+			'yaxis': {
+				'gridwidth': 1.0,
+				'gridcolor': 'rgb(120, 120, 120)'
+			},
+			'xaxis': {
+				'gridwidth': 1.0,
+				'gridcolor': 'rgb(120, 120, 120)'
+			},
 			'font': {
 				'color': colors['text']
 			}
